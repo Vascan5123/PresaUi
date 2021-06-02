@@ -41,6 +41,7 @@ export default function () {
             jumpTo = Math.min(discussion.lastPostNumber(), (discussion.lastReadPostNumber() || 0) + 1);
         }
 
+        console.log(listItems(this.infoItems().toArray()))
         return (
             <div {...attrs}>
                 {controls.length
@@ -62,30 +63,13 @@ export default function () {
                 </span>
 
                 <div className={'DiscussionListItem-content Slidable-content' + (isUnread ? ' unread' : '') + (isRead ? ' read' : '')}>
-                    <Link
-                        href={user ? app.route.discussion(discussion, jumpTo) : '#'}
-                        className="DiscussionListItem-author"
-                        title={extractText(
-                            app.translator.trans('core.forum.discussion_list.started_text', { user: user, ago: humanTime(discussion.createdAt()) })
-                        )}
-                    //tooltip
-                    /* oncreate={function (vnode) {
-                        $(vnode.dom).tooltip({ placement: 'right' });
-                    }} */
-                    >
-                        {/* user.data.attributes.avatarUrl = "" */}
-                        {/* avatar(user, { title: '' }) */}
-                        <span class="Avatar ">
-                            {/* <img class="Avatar" data-src="https://png.pngtree.com/thumb_back/fw800/background/20190222/ourmid/pngtree-autumnal-fall-big-tree-park-background-cartoon-design-backgroundfallbig-treefallen-leavespark-image_53954.jpg" /> */}
-                        </span>
 
-                    </Link>
 
                     <ul className="DiscussionListItem-badges badges">{listItems(discussion.badges().toArray())}</ul>
 
                     <Link href={app.route.discussion(discussion, jumpTo)} className="DiscussionListItem-main">
                         <h3 className="DiscussionListItem-title">{highlight(discussion.title(), this.highlightRegExp)}</h3>
-                        <ul className="DiscussionListItem-info">{listItems(this.infoItems().toArray())}</ul>
+                        <ul className="DiscussionListItem-info">{listItems(this.infoItems().toArray())[2]}{listItems(this.infoItems().toArray())[0]}</ul>
                     </Link>
 
                     <span
