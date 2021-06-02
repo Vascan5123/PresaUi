@@ -41,7 +41,6 @@ export default function () {
             jumpTo = Math.min(discussion.lastPostNumber(), (discussion.lastReadPostNumber() || 0) + 1);
         }
 
-        console.log(listItems(this.infoItems().toArray()))
         return (
             <div {...attrs}>
                 {controls.length
@@ -69,7 +68,7 @@ export default function () {
 
                     <Link href={app.route.discussion(discussion, jumpTo)} className="DiscussionListItem-main">
                         <h3 className="DiscussionListItem-title">{highlight(discussion.title(), this.highlightRegExp)}</h3>
-                        <ul className="DiscussionListItem-info">{listItems(this.infoItems().toArray())[2]}{listItems(this.infoItems().toArray())[0]}</ul>
+                        <ul className="DiscussionListItem-info">{listItems(this.infoItems().toArray())[listItems(this.infoItems().toArray()).length - 1]}{listItems(this.infoItems().toArray())[0]}</ul>
                     </Link>
 
                     <span
