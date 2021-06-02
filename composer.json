@@ -1,0 +1,36 @@
+{
+  "name": "vascan/presa-ui",
+  "keywords": [
+    "flarum"
+  ],
+  "type": "flarum-extension",
+  "license": "MIT",
+  "require": {
+    "flarum/core": "^1.0"
+  },
+  "authors": [
+    {
+      "name": "Lupan Vasile",
+      "email": "lupan.01@mail.ru",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Vascan\\PresaUi\\": "src/"
+    }
+  },
+  "extra": {
+    "flarum-extension": {
+      "title": "PresaUi",
+      "icon": {
+        "name": "fas fa-paint-brush",
+        "backgroundColor": "#0C3C60",
+        "color": "#fff"
+      }
+    },
+    "flagrow": {
+      "discuss": ""
+    }
+  }
+}
