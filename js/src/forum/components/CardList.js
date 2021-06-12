@@ -1,7 +1,6 @@
 import app from 'flarum/common/app';
 import { extend, override } from 'flarum/extend';
 
-
 import DiscussionListItem from 'flarum/components/DiscussionListItem';
 import DiscussionControls from 'flarum/utils/DiscussionControls';
 import Dropdown from 'flarum/components/Dropdown';
@@ -15,7 +14,6 @@ import highlight from 'flarum/helpers/highlight';
 import abbreviateNumber from 'flarum/utils/abbreviateNumber';
 
 import { escapeRegExp } from 'lodash-es';
-
 
 export default function () {
 
@@ -67,8 +65,9 @@ export default function () {
                     <ul className="DiscussionListItem-badges badges">{listItems(discussion.badges().toArray())}</ul>
 
                     <Link href={app.route.discussion(discussion, jumpTo)} className="DiscussionListItem-main">
+                        <ul className="DiscussionListItem-info">{listItems(this.infoItems().toArray())[listItems(this.infoItems().toArray()).length - 1]}</ul>
                         <h3 className="DiscussionListItem-title">{highlight(discussion.title(), this.highlightRegExp)}</h3>
-                        <ul className="DiscussionListItem-info">{listItems(this.infoItems().toArray())[listItems(this.infoItems().toArray()).length - 1]}{listItems(this.infoItems().toArray())[0]}</ul>
+                        <ul className="DiscussionListItem-info">{listItems(this.infoItems().toArray())[0]}</ul>
                     </Link>
 
                     <span
