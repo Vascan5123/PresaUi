@@ -57,8 +57,6 @@
     }
 }
 
-
-
 @media (min-width: 1365px) {
     .sideNav {
         justify-content: center;
@@ -102,7 +100,26 @@
     .IndexPage-nav .item-newDiscussion .Button:hover {
         background: #686f99 !important;
     }
-    .sideNav>ul>li {
+    .IndexPage-nav .item-Emoldova .Button {
+        position: absolute;
+        left: 0%;
+        bottom: 0%;
+        height: 52px;
+        border-radius: 0px;
+        background: #585e83 !important;
+        box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .IndexPage-nav .item-Emoldova .Button:hover {
+        background: #686f99 !important;
+    }
+    .sideNav>ul {
+        width: 100% !important;
         margin-top: 60px;
     }
     .container {
@@ -125,7 +142,11 @@
 
 }
 @media (min-width: 760px) and (max-width: 1365px){
+    .sideNavContainer {
+        display: flex;
+    }
     .sideNav {
+        white-space: unset !important;
         justify-content: center;
         display: flex;
         left: 0;
@@ -145,6 +166,25 @@
         height: auto;
         -ms-overflow-style: none;
         scrollbar-width: none;
+        .item-nav {
+            display: none !important;
+        }
+    }
+    .sideNav:after {
+        content: " ";
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin-top: 0px;
+        border-bottom: 0px !important;
+    }
+    .sideNav>ul {
+        margin-top: 60px;
+        width: 100% !important;
+    }
+    .sideNav>ul>li {
+        display: unset !important;
+        margin: 0px !important;
     }
     .IndexPage {
         margin-left: 225px;
@@ -157,6 +197,7 @@
         left: 0%;
         top: 0%;
         height: 52px;
+        width: 100%;
         border-radius: 0px;
         background: #585e83 !important;
         box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
@@ -164,9 +205,27 @@
     .IndexPage-nav .item-newDiscussion .Button:hover {
         background: #686f99 !important;
     }
-    .sideNav>ul>li {
-        margin-top: 60px;
+    .IndexPage-nav .item-Emoldova .Button {
+        position: absolute;
+        left: 0%;
+        bottom: 0%;
+        height: 52px;
+        border-radius: 0px;
+        background: #585e83 !important;
+        box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
+    .IndexPage-nav .item-Emoldova .Button:hover {
+        background: #686f99 !important;
+    }
+    /* .sideNav>ul>li {
+        margin-top: 60px;
+    } */
     .container {
         padding-right: 15px;
         padding-left: 15px;
@@ -194,10 +253,6 @@
     width: 100%;
     margin: 10px;
 }
-
-
-
-
 
 
 
@@ -255,4 +310,14 @@ body {
 }
 .Button--primary .Button-icon {
     display: unset !important;
+}
+.tags_left {
+    width: 100%;
+    font-size: 16px;
+    padding: 20px;
+    text-align: left;
+    box-shadow: 0 6px 4px -4px rgba(0, 0, 0, .2);
+}
+.IndexPage-nav .item-newDiscussion {
+    margin: 0px;
 }
