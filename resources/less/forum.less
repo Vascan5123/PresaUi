@@ -8,6 +8,7 @@
         width: 100%;
         box-shadow: 0 6px 4px 0px rgba(0, 0, 0, 0.15);
         padding: 20px;
+        margin-left: 0px !important;
     }
     .DiscussionListItem-info .item-excerpt img {
         max-width: 100% !important;
@@ -20,6 +21,9 @@
         margin-right: 0px;
         font-size: 14px;
     }
+    .DiscussionListItem-info .item-excerpt>div>p>span {
+        display: block !important;
+    }
     /* .DiscussionListItem-info .item-excerpt p {
         margin-left: 15px;
         margin-right: 15px;
@@ -29,7 +33,7 @@
         margin: 10px !important;
         font-size: 18px !important;
         font-weight: 600;
-        height: 70px;
+        height: 50px;
     }
     .DiscussionListItem-info .item-tags {
         position: relative !important;
@@ -183,8 +187,9 @@
         width: 100% !important;
     }
     .sideNav>ul>li {
-        display: unset !important;
-        margin: 0px !important;
+        display: block !important;
+        margin-bottom: 10px !important;
+        margin-right: 0px;
     }
     .IndexPage {
         margin-left: 225px;
@@ -317,6 +322,10 @@ body {
     padding: 20px;
     text-align: left;
     box-shadow: 0 6px 4px -4px rgba(0, 0, 0, .2);
+}
+.tags_center {
+    margin-top: 4px;
+    margin-bottom: 4px;
 }
 .IndexPage-nav .item-newDiscussion {
     margin: 0px;
