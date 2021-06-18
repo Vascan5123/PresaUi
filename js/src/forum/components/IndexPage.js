@@ -22,7 +22,7 @@ export default function () {
                     className: 'Button Button--primary item-Emoldova',
                     itemClassName: 'App-primaryControl',
                 },
-                "Emoldova"
+                "E-Moldova"
             ),
         );
 
@@ -36,7 +36,7 @@ export default function () {
                         LinkButton.component(
                             {
                                 icon: app.store.all('tags')[i].data.attributes.icon,
-                                href: '/press/t/' + app.store.all('tags')[i].data.attributes.slug,
+                                href: 't/' + app.store.all('tags')[i].data.attributes.slug,
                                 className: 'Button Button--primary tags_left',
                                 itemClassName: 'App-primaryControl',
                             },
@@ -50,7 +50,7 @@ export default function () {
                         LinkButton.component(
                             {
                                 icon: app.store.all('tags')[i].data.attributes.icon,
-                                href: '/press/t/' + app.store.all('tags')[i].data.attributes.slug,
+                                href: 't/' + app.store.all('tags')[i].data.attributes.slug,
                                 className: 'Button Button--primary tags_left',
                                 itemClassName: 'App-primaryControl',
                             },
@@ -64,7 +64,7 @@ export default function () {
                         LinkButton.component(
                             {
                                 icon: app.store.all('tags')[i].data.attributes.icon,
-                                href: '/press/t/' + app.store.all('tags')[i].data.attributes.slug,
+                                href: 't/' + app.store.all('tags')[i].data.attributes.slug,
                                 className: 'Button Button--primary tags_left',
                                 itemClassName: 'App-primaryControl',
                             },
@@ -77,6 +77,7 @@ export default function () {
             }
         }
         /* console.log(sidebarItems.items) */
+        
     });
     extend(IndexPage.prototype, 'viewItems', function (viewItems) {
 
@@ -88,7 +89,7 @@ export default function () {
                 items.splice(0, i + 1);
             }
         }
-
+        /* && (!items[y].attrs.model.data.attributes.isChild) */
         for (let y = 0; y < items.length; y++) {
             if ((items[y].children[0] != "Noutăți") && (items[y].children[0] != "Canale") && (items[y].children[0] != "Emisiuni") && (!items[y].attrs.model.data.attributes.isChild)) {
                 viewItems.add(
@@ -96,7 +97,7 @@ export default function () {
                     LinkButton.component(
                         {
                             icon: items[y].attrs.model.data.attributes.icon,
-                            href: '/press/t/' + items[y].attrs.model.data.attributes.slug,
+                            href: 't/' + items[y].attrs.model.data.attributes.slug,
                             className: 'Button Button--primary tags_center',
                             itemClassName: 'App-primaryControl',
                         },

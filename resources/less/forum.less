@@ -29,6 +29,7 @@
         margin-right: 15px;
     } */
     .DiscussionListItem-title {
+        color: #f2f2f2;
         justify-content: center;
         margin: 10px !important;
         font-size: 18px !important;
@@ -43,13 +44,28 @@
         bottom: unset !important;
         top: unset !important;
         left: unset !important;
-        -webkit-mask-image: unset !important;
+        -webkit-mask-image: linear-gradient(to right, #000 85%, rgba(0,0,0,0) 100%) !important;
         justify-content: left;
         margin: 10px;
         display: flex;
     }
-    .TagLabel-text {
+    .TagsLabel {
+        display: inherit;
+    }
+    .TagLabel>.TagLabel-text {
         font-size: 0% !important;
+        i {
+            font-size: 12px;
+            padding-inline: 6px;
+            padding-block: 3px;
+        }
+    }
+    .TagLabel--child {
+        background: #124d8e;
+        color: #fff;
+    }
+    .TagLabel--child>.TagLabel-text {
+        font-size: 12px !important;
         i {
             font-size: 12px;
             padding-inline: 6px;
@@ -329,4 +345,19 @@ body {
 }
 .IndexPage-nav .item-newDiscussion {
     margin: 0px;
+}
+@media (min-width: 768px){
+    .DiscussionListItem-controls {
+        position: absolute;
+        top: unset !important;
+        bottom: 10px !important;
+    }
+    .DiscussionListItem-controls>button{
+        padding: 4px !important;
+        color: #fff;
+    }
+}
+video {
+    width: 100%;
+    display: block;
 }

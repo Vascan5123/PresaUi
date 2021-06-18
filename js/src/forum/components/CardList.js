@@ -44,7 +44,7 @@ export default function () {
                 {controls.length
                     ? Dropdown.component(
                         {
-                            icon: 'fas fa-ellipsis-v',
+                            icon: 'fas fa-ellipsis-h',
                             className: 'DiscussionListItem-controls',
                             buttonClassName: 'Button Button--icon Button--flat Slidable-underneath Slidable-underneath--right',
                         },
