@@ -26,55 +26,195 @@ export default function () {
             ),
         );
 
-        /* console.log(app.store.all('tags')) */
+        console.log(app.store.all('tags'))
 
         for (let i = 0; i < app.store.all('tags').length; i++) {
+            let id = -1;
             switch (app.store.all('tags')[i].data.attributes.name) {
                 case "Noutăți":
+                    id = app.store.all('tags')[i].data.id;
                     sidebarItems.add(
                         app.store.all('tags')[i].data.attributes.name,
                         LinkButton.component(
                             {
                                 icon: app.store.all('tags')[i].data.attributes.icon,
-                                href: 't/' + app.store.all('tags')[i].data.attributes.slug,
+                                href: '/t/' + app.store.all('tags')[i].data.attributes.slug,
                                 className: 'Button Button--primary tags_left',
                                 itemClassName: 'App-primaryControl',
                             },
                             app.store.all('tags')[i].data.attributes.name
                         ),
                     );
+
+
+                    if (app.store.all('tags')[i].data.relationships) {
+                        if (app.store.all('tags')[i].data.relationships.children) {
+
+                            for (let x = 0; x < app.store.all('tags')[i].data.relationships.children.data.length; x++) {
+
+                                let id_tag_children = app.store.all('tags')[i].data.relationships.children.data[x].id;
+                                /* console.log(id_tag_children); */
+
+                                for (let z = 0; z < app.store.all('tags').length; z++) {
+                                    if (app.store.all('tags')[z].data.id == id_tag_children) {
+                                        sidebarItems.add(
+                                            app.store.all('tags')[z].data.attributes.name,
+                                            LinkButton.component(
+                                                {
+                                                    icon: app.store.all('tags')[z].data.attributes.icon,
+                                                    href: '/t/' + app.store.all('tags')[z].data.attributes.slug,
+                                                    className: 'Button Button--primary tags_left_child',
+                                                    itemClassName: 'App-primaryControl',
+                                                },
+                                                app.store.all('tags')[z].data.attributes.name
+                                            ),
+                                        );
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+
+
+
                     break;
                 case "Canale":
+                    id = app.store.all('tags')[i].data.id;
                     sidebarItems.add(
                         app.store.all('tags')[i].data.attributes.name,
                         LinkButton.component(
                             {
                                 icon: app.store.all('tags')[i].data.attributes.icon,
-                                href: 't/' + app.store.all('tags')[i].data.attributes.slug,
+                                href: '/t/' + app.store.all('tags')[i].data.attributes.slug,
                                 className: 'Button Button--primary tags_left',
                                 itemClassName: 'App-primaryControl',
                             },
                             app.store.all('tags')[i].data.attributes.name
                         ),
                     );
+
+
+                    if (app.store.all('tags')[i].data.relationships) {
+                        if (app.store.all('tags')[i].data.relationships.children) {
+
+                            for (let x = 0; x < app.store.all('tags')[i].data.relationships.children.data.length; x++) {
+
+                                let id_tag_children = app.store.all('tags')[i].data.relationships.children.data[x].id;
+                                /* console.log(id_tag_children); */
+
+                                for (let z = 0; z < app.store.all('tags').length; z++) {
+                                    if (app.store.all('tags')[z].data.id == id_tag_children) {
+                                        sidebarItems.add(
+                                            app.store.all('tags')[z].data.attributes.name,
+                                            LinkButton.component(
+                                                {
+                                                    icon: app.store.all('tags')[z].data.attributes.icon,
+                                                    href: '/t/' + app.store.all('tags')[z].data.attributes.slug,
+                                                    className: 'Button Button--primary tags_left_child',
+                                                    itemClassName: 'App-primaryControl',
+                                                },
+                                                app.store.all('tags')[z].data.attributes.name
+                                            ),
+                                        );
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+
+
+
+
+
                     break;
                 case "Emisiuni":
+                    id = app.store.all('tags')[i].data.id;
                     sidebarItems.add(
                         app.store.all('tags')[i].data.attributes.name,
                         LinkButton.component(
                             {
                                 icon: app.store.all('tags')[i].data.attributes.icon,
-                                href: 't/' + app.store.all('tags')[i].data.attributes.slug,
+                                href: '/t/' + app.store.all('tags')[i].data.attributes.slug,
                                 className: 'Button Button--primary tags_left',
                                 itemClassName: 'App-primaryControl',
                             },
                             app.store.all('tags')[i].data.attributes.name
                         ),
                     );
+
+                    if (app.store.all('tags')[i].data.relationships) {
+                        if (app.store.all('tags')[i].data.relationships.children) {
+
+                            for (let x = 0; x < app.store.all('tags')[i].data.relationships.children.data.length; x++) {
+
+                                let id_tag_children = app.store.all('tags')[i].data.relationships.children.data[x].id;
+                                /* console.log(id_tag_children); */
+
+                                for (let z = 0; z < app.store.all('tags').length; z++) {
+                                    if (app.store.all('tags')[z].data.id == id_tag_children) {
+                                        sidebarItems.add(
+                                            app.store.all('tags')[z].data.attributes.name,
+                                            LinkButton.component(
+                                                {
+                                                    icon: app.store.all('tags')[z].data.attributes.icon,
+                                                    href: '/t/' + app.store.all('tags')[z].data.attributes.slug,
+                                                    className: 'Button Button--primary tags_left_child',
+                                                    itemClassName: 'App-primaryControl',
+                                                },
+                                                app.store.all('tags')[z].data.attributes.name
+                                            ),
+                                        );
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+
                     break;
                 default:
                     break;
             }
+
+
+
+
+            if (id != -1) {
+                /* console.log(i)
+                console.log(app.store.all('tags')[i]) */
+                /* if(app.store.all('tags')[id].data){
+
+                } */
+
+
+
+
+
+
+
+
+                /* switch (app.store.all('tags')[i++].data.attributes.name) {
+                    case i++:
+                        sidebarItems.add(
+                            app.store.all('tags')[i++].data.attributes.name,
+                            LinkButton.component(
+                                {
+                                    icon: app.store.all('tags')[i++].data.attributes.icon,
+                                    href: 't/' + app.store.all('tags')[i++].data.attributes.slug,
+                                    className: 'Button Button--primary tags_left',
+                                    itemClassName: 'App-primaryControl',
+                                },
+                                app.store.all('tags')[i++].data.attributes.name
+                            ),
+                        );
+                        break;
+                    default:
+                        break;
+                } */
+            }
+
         }
         /* console.log(sidebarItems.items) */
 
@@ -97,7 +237,7 @@ export default function () {
                     LinkButton.component(
                         {
                             icon: items[y].attrs.model.data.attributes.icon,
-                            href: 't/' + items[y].attrs.model.data.attributes.slug,
+                            href: '/t/' + items[y].attrs.model.data.attributes.slug,
                             className: 'Button Button--primary tags_center',
                             itemClassName: 'App-primaryControl',
                         },
