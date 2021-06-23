@@ -12,7 +12,7 @@ export default function () {
             for (let i = 0; i < lengthTags; i++) {
                 let text = items1.items.tags.content.children[i].children[0].children[2].children
 
-                if ((text == "Canale") || (text == "An") || (text == "Luna") || (text == "Zi")) {
+                if ((text == "Canale") || (text == "An") || (text == "Luna") || (text == "Zi") || (text == "Emisiuni")) {
                     items1.items.tags.content.children[i].attrs.className += " d-none"
                     console.log(items1.items.tags.content.children[i].attrs.className)
 

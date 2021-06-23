@@ -1,6 +1,7 @@
 import app from 'flarum/common/app';
 import { extend, override } from 'flarum/extend';
 import Button from 'flarum/components/Button';
+import Dropdown from 'flarum/components/Dropdown';
 import LinkButton from 'flarum/components/LinkButton';
 import IndexPage from 'flarum/components/IndexPage';
 import DiscussionList from 'flarum/components/DiscussionList';
@@ -38,7 +39,7 @@ export default function () {
                         LinkButton.component(
                             {
                                 icon: app.store.all('tags')[i].data.attributes.icon,
-                                href: '/t/' + app.store.all('tags')[i].data.attributes.slug,
+                                href: 't/' + app.store.all('tags')[i].data.attributes.slug,
                                 className: 'Button Button--primary tags_left',
                                 itemClassName: 'App-primaryControl',
                             },
@@ -62,7 +63,7 @@ export default function () {
                                             LinkButton.component(
                                                 {
                                                     icon: app.store.all('tags')[z].data.attributes.icon,
-                                                    href: '/t/' + app.store.all('tags')[z].data.attributes.slug,
+                                                    href: 't/' + app.store.all('tags')[z].data.attributes.slug,
                                                     className: 'Button Button--primary tags_left_child',
                                                     itemClassName: 'App-primaryControl',
                                                 },
@@ -86,7 +87,7 @@ export default function () {
                         LinkButton.component(
                             {
                                 icon: app.store.all('tags')[i].data.attributes.icon,
-                                href: '/t/' + app.store.all('tags')[i].data.attributes.slug,
+                                href: 't/' + app.store.all('tags')[i].data.attributes.slug,
                                 className: 'Button Button--primary tags_left',
                                 itemClassName: 'App-primaryControl',
                             },
@@ -136,7 +137,7 @@ export default function () {
                         LinkButton.component(
                             {
                                 icon: app.store.all('tags')[i].data.attributes.icon,
-                                href: '/t/' + app.store.all('tags')[i].data.attributes.slug,
+                                href: 't/' + app.store.all('tags')[i].data.attributes.slug,
                                 className: 'Button Button--primary tags_left',
                                 itemClassName: 'App-primaryControl',
                             },
@@ -220,6 +221,38 @@ export default function () {
 
     });
     extend(IndexPage.prototype, 'viewItems', function (viewItems) {
+
+        /* if (viewItems.has('sort')) {
+            viewItems.remove('sort');
+        } */
+
+        const sortOptions = {};
+
+        const sortMap = app.discussions.sortMap();
+
+        viewItems.add(
+            'sort2',
+            Dropdown.component(
+              {
+                buttonClassName: 'Button',
+                label: "An",
+                accessibleToggleLabel: "An",
+              },
+              Object.keys(sortOptions).map((value) => {
+                const label = sortOptions[value];
+                const active = (app.search.params().sort || Object.keys(sortMap)[0]) === value;
+      
+                return Button.component(
+                  {
+                    icon: active ? 'fas fa-check' : true,
+                    onclick: app.search.changeSort.bind(app.search, value),
+                    active: active,
+                  },
+                  "An"
+                );
+              })
+            )
+          );
 
 
         let items = IndexPage.prototype.sidebarItems().items.nav.content.children;
