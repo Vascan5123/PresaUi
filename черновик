@@ -1,0 +1,98 @@
+
+
+
+
+
+
+
+
+
+            if (id != -1) {
+                /* console.log(i)
+                console.log(app.store.all('tags')[i]) */
+                /* if(app.store.all('tags')[id].data){
+
+                } */
+
+
+
+
+
+
+
+
+                /* switch (app.store.all('tags')[i++].data.attributes.name) {
+                    case i++:
+                        sidebarItems.add(
+                            app.store.all('tags')[i++].data.attributes.name,
+                            LinkButton.component(
+                                {
+                                    icon: app.store.all('tags')[i++].data.attributes.icon,
+                                    href: 't/' + app.store.all('tags')[i++].data.attributes.slug,
+                                    className: 'Button Button--primary tags_left',
+                                    itemClassName: 'App-primaryControl',
+                                },
+                                app.store.all('tags')[i++].data.attributes.name
+                            ),
+                        );
+                        break;
+                    default:
+                        break;
+                } */
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        if (!items.has('An')) {
+            items.add(
+                'An',
+                LinkButton.component(
+                    {
+                        href: '/t/' + 'an',
+                        className: 'Button Button--primary tags_center',
+                        itemClassName: 'App-primaryControl',
+                    },
+                    'An'
+                )
+            );
+        }
+
+
+         if (!items.has('Luna')) {
+            items.add(
+                'Luna',
+                LinkButton.component(
+                    {
+                        href: '/t/' + 'luna',
+                        className: 'Button Button--primary tags_center',
+                        itemClassName: 'App-primaryControl',
+                    },
+                    'Luna'
+                )
+            );
+        }
+
+
+             if (!items.has('Zi')) {
+            items.add(
+                'Zi',
+                LinkButton.component(
+                    {
+                        href: '/t/' + 'zi',
+                        className: 'Button Button--primary tags_center',
+                        itemClassName: 'App-primaryControl',
+                    },
+                    'Zi'
+                )
+            );
+        }

@@ -9,7 +9,7 @@ import listItems from 'flarum/helpers/listItems';
 
 export default function () {
 
-    extend(IndexPage.prototype, 'sidebarItems', function (sidebarItems) {
+    extend(IndexPage.prototype, 'sidebarItems', async function (sidebarItems) {
 
         function goEmoldova() {
             location.href = "https://emoldova.org/";
@@ -27,8 +27,6 @@ export default function () {
             ),
         );
 
-        console.log(app.store.all('tags'))
-
         for (let i = 0; i < app.store.all('tags').length; i++) {
             let id = -1;
             switch (app.store.all('tags')[i].data.attributes.name) {
@@ -39,55 +37,7 @@ export default function () {
                         LinkButton.component(
                             {
                                 icon: app.store.all('tags')[i].data.attributes.icon,
-                                href: 't/' + app.store.all('tags')[i].data.attributes.slug,
-                                className: 'Button Button--primary tags_left',
-                                itemClassName: 'App-primaryControl',
-                            },
-                            app.store.all('tags')[i].data.attributes.name
-                        ),
-                    );
-
-
-                    if (app.store.all('tags')[i].data.relationships) {
-                        if (app.store.all('tags')[i].data.relationships.children) {
-
-                            for (let x = 0; x < app.store.all('tags')[i].data.relationships.children.data.length; x++) {
-
-                                let id_tag_children = app.store.all('tags')[i].data.relationships.children.data[x].id;
-                                /* console.log(id_tag_children); */
-
-                                for (let z = 0; z < app.store.all('tags').length; z++) {
-                                    if (app.store.all('tags')[z].data.id == id_tag_children) {
-                                        sidebarItems.add(
-                                            app.store.all('tags')[z].data.attributes.name,
-                                            LinkButton.component(
-                                                {
-                                                    icon: app.store.all('tags')[z].data.attributes.icon,
-                                                    href: 't/' + app.store.all('tags')[z].data.attributes.slug,
-                                                    className: 'Button Button--primary tags_left_child',
-                                                    itemClassName: 'App-primaryControl',
-                                                },
-                                                app.store.all('tags')[z].data.attributes.name
-                                            ),
-                                        );
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-
-
-
-                    break;
-                case "Canale":
-                    id = app.store.all('tags')[i].data.id;
-                    sidebarItems.add(
-                        app.store.all('tags')[i].data.attributes.name,
-                        LinkButton.component(
-                            {
-                                icon: app.store.all('tags')[i].data.attributes.icon,
-                                href: 't/' + app.store.all('tags')[i].data.attributes.slug,
+                                href: '/t/' + app.store.all('tags')[i].data.attributes.slug,
                                 className: 'Button Button--primary tags_left',
                                 itemClassName: 'App-primaryControl',
                             },
@@ -123,12 +73,111 @@ export default function () {
                             }
                         }
                     }
+                    break;
+                case "Canale":
+
+                    const sortMap = app.discussions.sortMap();
+
+                    let sortOptionsCanale = [];
+
+                    if (app.store.all('tags')[i].data.relationships) {
+                        if (app.store.all('tags')[i].data.relationships.children) {
+
+                            for (let x = 0; x < app.store.all('tags')[i].data.relationships.children.data.length; x++) {
+
+                                let id_tag_children = app.store.all('tags')[i].data.relationships.children.data[x].id;
+
+                                let title_tag_children;
+                                let href_tag_children;
+
+                                for (let z = 0; z < app.store.all('tags').length; z++) {
+                                    if (app.store.all('tags')[z].data.id == id_tag_children) {
+                                        title_tag_children = app.store.all('tags')[z].data.attributes.name;
+                                        href_tag_children = app.store.all('tags')[z].data.attributes.slug;
+                                    }
+                                }
+                                let params = {
+                                    name: title_tag_children,
+                                    href: href_tag_children
+                                }
+                                sortOptionsCanale.push(params);
+
+                            }
+                        }
+                    }
 
 
 
+                    if (!sidebarItems.has(app.store.all('tags')[i].data.attributes.name)) {
+                        id = app.store.all('tags')[i].data.id;
+                        sidebarItems.add(
+                            app.store.all('tags')[i].data.attributes.name,
+                            Dropdown.component(
+                                {
+                                    icon: app.store.all('tags')[i].data.attributes.icon,
+                                    buttonClassName: 'Button Button--primary tags_left',
+                                    label: "Canale",
+                                    accessibleToggleLabel: "Canale",
+                                },
+                                Object.keys(sortOptionsCanale).map((value) => {
+                                    const label = sortOptionsCanale[value];
+                                    const active = (app.search.params().sort || Object.keys(sortMap)[0]) === value;
+
+                                    return LinkButton.component(
+                                        {
+                                            icon: active ? 'fas fa-check' : true,
+                                            href: '/t/' + label.href,
+                                            active: active,
+                                        },
+                                        label.name
+                                    );
+                                })
+                            )
+                        );
+                    }
 
 
 
+                    /* id = app.store.all('tags')[i].data.id;
+                    sidebarItems.add(
+                        app.store.all('tags')[i].data.attributes.name,
+                        LinkButton.component(
+                            {
+                                icon: app.store.all('tags')[i].data.attributes.icon,
+                                href: '/press/t/' + app.store.all('tags')[i].data.attributes.slug,
+                                className: 'Button Button--primary tags_left',
+                                itemClassName: 'App-primaryControl',
+                            },
+                            app.store.all('tags')[i].data.attributes.name
+                        ),
+                    );
+
+                    if (app.store.all('tags')[i].data.relationships) {
+                        if (app.store.all('tags')[i].data.relationships.children) {
+
+                            for (let x = 0; x < app.store.all('tags')[i].data.relationships.children.data.length; x++) {
+
+                                let id_tag_children = app.store.all('tags')[i].data.relationships.children.data[x].id;
+
+                                for (let z = 0; z < app.store.all('tags').length; z++) {
+                                    if (app.store.all('tags')[z].data.id == id_tag_children) {
+                                        sidebarItems.add(
+                                            app.store.all('tags')[z].data.attributes.name,
+                                            LinkButton.component(
+                                                {
+                                                    icon: "",
+                                                    href: '/press/t/' + app.store.all('tags')[z].data.attributes.slug,
+                                                    className: 'Button Button--primary tags_left_child',
+                                                    itemClassName: 'App-primaryControl',
+                                                },
+                                                app.store.all('tags')[z].data.attributes.name
+                                            ),
+                                        );
+                                    }
+                                }
+                            }
+                        }
+                    } */
                     break;
                 case "Emisiuni":
                     id = app.store.all('tags')[i].data.id;
@@ -137,7 +186,7 @@ export default function () {
                         LinkButton.component(
                             {
                                 icon: app.store.all('tags')[i].data.attributes.icon,
-                                href: 't/' + app.store.all('tags')[i].data.attributes.slug,
+                                href: '/t/' + app.store.all('tags')[i].data.attributes.slug,
                                 className: 'Button Button--primary tags_left',
                                 itemClassName: 'App-primaryControl',
                             },
@@ -172,8 +221,6 @@ export default function () {
                             }
                         }
                     }
-
-
                     break;
                 default:
                     break;
@@ -181,78 +228,30 @@ export default function () {
 
 
 
-
-            if (id != -1) {
-                /* console.log(i)
-                console.log(app.store.all('tags')[i]) */
-                /* if(app.store.all('tags')[id].data){
-
-                } */
-
-
-
-
-
-
-
-
-                /* switch (app.store.all('tags')[i++].data.attributes.name) {
-                    case i++:
-                        sidebarItems.add(
-                            app.store.all('tags')[i++].data.attributes.name,
-                            LinkButton.component(
-                                {
-                                    icon: app.store.all('tags')[i++].data.attributes.icon,
-                                    href: 't/' + app.store.all('tags')[i++].data.attributes.slug,
-                                    className: 'Button Button--primary tags_left',
-                                    itemClassName: 'App-primaryControl',
-                                },
-                                app.store.all('tags')[i++].data.attributes.name
-                            ),
-                        );
-                        break;
-                    default:
-                        break;
-                } */
-            }
-
         }
-        /* console.log(sidebarItems.items) */
+        var tags = await app.tagList.load(['children', 'lastPostedDiscussion', 'parent']).then(() => {
+            return app.store.all('tags');
+        });
+        /* console.log(tags) */
+
+
+
+
+
+
+
+
+
+
+
 
     });
     extend(IndexPage.prototype, 'viewItems', function (viewItems) {
 
-        /* if (viewItems.has('sort')) {
+        if (viewItems.has('sort')) {
             viewItems.remove('sort');
-        } */
+        }
 
-        const sortOptions = {};
-
-        const sortMap = app.discussions.sortMap();
-
-        viewItems.add(
-            'sort2',
-            Dropdown.component(
-              {
-                buttonClassName: 'Button',
-                label: "An",
-                accessibleToggleLabel: "An",
-              },
-              Object.keys(sortOptions).map((value) => {
-                const label = sortOptions[value];
-                const active = (app.search.params().sort || Object.keys(sortMap)[0]) === value;
-      
-                return Button.component(
-                  {
-                    icon: active ? 'fas fa-check' : true,
-                    onclick: app.search.changeSort.bind(app.search, value),
-                    active: active,
-                  },
-                  "An"
-                );
-              })
-            )
-          );
 
 
         let items = IndexPage.prototype.sidebarItems().items.nav.content.children;
@@ -282,44 +281,147 @@ export default function () {
     });
 
     extend(IndexPage.prototype, 'actionItems', function (items) {
+
+        const sortMap = app.discussions.sortMap();
+
+        const sortOptionsAn = [
+            "2021",
+            "2020",
+            "2019",
+            "2018",
+            "2017",
+            "2016",
+            "2015",
+            "2014",
+            "2013",
+            "2012",
+            "2011",
+            "2010",
+        ];
+
         if (!items.has('An')) {
             items.add(
                 'An',
-                LinkButton.component(
+                Dropdown.component(
                     {
-                        href: '/t/' + 'an',
-                        className: 'Button Button--primary tags_center',
-                        itemClassName: 'App-primaryControl',
+                        buttonClassName: 'Button Button--primary tags_center',
+                        label: "An",
+                        accessibleToggleLabel: "An",
                     },
-                    'An'
+                    Object.keys(sortOptionsAn).map((value) => {
+                        const label = sortOptionsAn[value];
+                        const active = (app.search.params().sort || Object.keys(sortMap)[0]) === value;
+
+                        return LinkButton.component(
+                            {
+                                icon: active ? 'fas fa-check' : true,
+                                href: '/t/' + label,
+                                active: active,
+                            },
+                            label
+                        );
+                    })
                 )
             );
         }
+
+        const sortOptionsLuna = [
+            "Ianuarie",
+            "Februarie",
+            "Martie",
+            "Aprilie",
+            "Mai",
+            "Iunie",
+            "Iulie",
+            "August",
+            "Septembrie",
+            "Octombrie",
+            "Noiembrie",
+            "Decembrie",
+        ];
 
         if (!items.has('Luna')) {
             items.add(
                 'Luna',
-                LinkButton.component(
+                Dropdown.component(
                     {
-                        href: '/t/' + 'luna',
-                        className: 'Button Button--primary tags_center',
-                        itemClassName: 'App-primaryControl',
+                        buttonClassName: 'Button Button--primary tags_center',
+                        label: "Luna",
+                        accessibleToggleLabel: "Luna",
                     },
-                    'Luna'
+                    Object.keys(sortOptionsLuna).map((value) => {
+                        const label = sortOptionsLuna[value];
+                        const active = (app.search.params().sort || Object.keys(sortMap)[0]) === value;
+
+                        return LinkButton.component(
+                            {
+                                icon: active ? 'fas fa-check' : true,
+                                href: '/t/' + label,
+                                active: active,
+                            },
+                            label
+                        );
+                    })
                 )
             );
         }
 
+        const sortOptionsZi = [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30",
+            "31",
+        ];
+
         if (!items.has('Zi')) {
             items.add(
                 'Zi',
-                LinkButton.component(
+                Dropdown.component(
                     {
-                        href: '/t/' + 'zi',
-                        className: 'Button Button--primary tags_center',
-                        itemClassName: 'App-primaryControl',
+                        buttonClassName: 'Button Button--primary tags_center',
+                        label: "Zi",
+                        accessibleToggleLabel: "Zi",
                     },
-                    'Zi'
+                    Object.keys(sortOptionsZi).map((value) => {
+                        const label = sortOptionsZi[value];
+                        const active = (app.search.params().sort || Object.keys(sortMap)[0]) === value;
+
+                        return LinkButton.component(
+                            {
+                                icon: active ? 'fas fa-check' : true,
+                                href: '/t/' + label,
+                                active: active,
+                            },
+                            label
+                        );
+                    })
                 )
             );
         }
