@@ -21,7 +21,7 @@ export default function () {
                     onclick: goEmoldova.bind(this),
                     icon: 'fas fa-home',
                     className: 'Button Button--primary item-Emoldova',
-                    itemClassName: 'App-primaryControl',
+                    itemClassName: '',
                 },
                 "E-Moldova"
             ),
@@ -41,7 +41,7 @@ export default function () {
                                 icon: app.store.all('tags')[i].data.attributes.icon,
                                 href: '/t/' + app.store.all('tags')[i].data.attributes.slug,
                                 className: 'Button Button--primary tags_left',
-                                itemClassName: 'App-primaryControl',
+                                itemClassName: '',
                             },
                             app.store.all('tags')[i].data.attributes.name
                         ),
@@ -65,7 +65,7 @@ export default function () {
                                                     icon: app.store.all('tags')[z].data.attributes.icon,
                                                     href: '/t/' + app.store.all('tags')[z].data.attributes.slug,
                                                     className: 'Button Button--primary tags_left_child',
-                                                    itemClassName: 'App-primaryControl',
+                                                    itemClassName: '',
                                                 },
                                                 app.store.all('tags')[z].data.attributes.name
                                             ),
@@ -246,7 +246,7 @@ export default function () {
                             icon: items[y].attrs.model.data.attributes.icon,
                             href: '/t/' + items[y].attrs.model.data.attributes.slug,
                             className: 'Button Button--primary tags_center',
-                            itemClassName: 'App-primaryControl',
+                            itemClassName: '',
                         },
                         items[y].children[0]
                     )

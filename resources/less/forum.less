@@ -1,6 +1,6 @@
 
 
-.IndexPage{
+.IndexPage, .DiscussionsUserPage{
     .DiscussionListItem-content {
         padding: 0px !important;
     }
@@ -79,28 +79,30 @@
 }
 
 @media (min-width: 1365px) {
-    .sideNav {
-        justify-content: center;
-        display: flex;
-        left: 0;
-        z-index: 1000;
-        overflow: auto;
-        top: 0;
-        width: 225px;
-        background: #383c53;
-        padding-bottom: 80px;
-        padding-top: 0px;
-        box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
-        -webkit-transition: left .2s;
-        -o-transition: left .2s;
-        transition: left .2s;
-        position: fixed;
-        bottom: 0;
-        height: auto;
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-        .item-nav {
-            display: none !important;
+    .IndexPage {
+        .sideNav {
+            justify-content: center;
+            display: flex;
+            left: 0;
+            z-index: 1000;
+            overflow: auto;
+            top: 0;
+            width: 225px;
+            background: #383c53;
+            padding-bottom: 80px;
+            padding-top: 0px;
+            box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
+            -webkit-transition: left .2s;
+            -o-transition: left .2s;
+            transition: left .2s;
+            position: fixed;
+            bottom: 0;
+            height: auto;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            .item-nav {
+                display: none !important;
+            }
         }
     }
     .IndexPage {
@@ -178,32 +180,34 @@
     }
 }
 @media (min-width: 760px) and (max-width: 1365px){
-    .sideNavContainer {
-        display: flex;
-    }
-    .sideNav {
-        white-space: unset !important;
-        justify-content: center;
-        display: flex;
-        left: 0;
-        z-index: 1000;
-        overflow: auto;
-        top: 0;
-        width: 225px;
-        background: #383c53;
-        padding-bottom: 80px;
-        padding-top: 0px;
-        box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
-        -webkit-transition: left .2s;
-        -o-transition: left .2s;
-        transition: left .2s;
-        position: fixed;
-        bottom: 0;
-        height: auto;
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-        .item-nav {
-            display: none !important;
+    .IndexPage {
+        .sideNavContainer {
+            display: flex;
+        }
+        .sideNav {
+            white-space: unset !important;
+            justify-content: center;
+            display: flex;
+            left: 0;
+            z-index: 1000;
+            overflow: auto;
+            top: 0;
+            width: 225px;
+            background: #383c53;
+            padding-bottom: 80px;
+            padding-top: 0px;
+            box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
+            -webkit-transition: left .2s;
+            -o-transition: left .2s;
+            transition: left .2s;
+            position: fixed;
+            bottom: 0;
+            height: auto;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            .item-nav {
+                display: none !important;
+            }
         }
     }
     .sideNav:after {
@@ -286,9 +290,27 @@
     width: 100%;
     margin: 10px;
 }
-
-
-
+.tags_center {
+    display: none !important;
+}
+.item-Emoldova  {
+    width: 100%;
+    font-size: 16px;
+    text-align: left;
+}
+.item-Emoldova>a {
+    padding: 20px;
+}
+.sideNav>ul>li {
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 6px 4px -4px rgba(0, 0, 0, 0.2);
+}
+.sideNav>ul>li>div>button {
+    
+}
 
 
 
@@ -299,6 +321,8 @@
 
 
 }
+
+
 
 
 .IndexPage .item-sort > div > button {
