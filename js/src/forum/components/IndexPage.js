@@ -3,6 +3,7 @@ import { extend, override } from 'flarum/extend';
 import Button from 'flarum/components/Button';
 import Dropdown from 'flarum/components/Dropdown';
 import LinkButton from 'flarum/components/LinkButton';
+import Link from 'flarum/components/Link';
 import IndexPage from 'flarum/components/IndexPage';
 import DiscussionList from 'flarum/components/DiscussionList';
 import listItems from 'flarum/helpers/listItems';
@@ -123,15 +124,22 @@ export default function () {
                                 Object.keys(sortOptionsCanale).map((value) => {
                                     const label = sortOptionsCanale[value];
                                     const active = (app.search.params().sort || Object.keys(sortMap)[0]) === value;
+                                    app.title = "10TV";
+                                    function change_hero() {
+                                         /* document.getElementsByClassName("Hero-title")[0].innerHTML = label.name; */
+                                    }
 
                                     return LinkButton.component(
                                         {
                                             icon: active ? 'fas fa-check' : true,
+                                            class: "TagLinkButton hasIcon",
                                             href: '/t/' + label.href,
                                             active: active,
+                                            onclick: change_hero.bind(this),
                                         },
                                         label.name
                                     );
+
                                 })
                             )
                         );
@@ -336,7 +344,7 @@ export default function () {
             }
         }
 
-        
+
 
         const sortOptionsLuna = [
             "Ianuarie",
