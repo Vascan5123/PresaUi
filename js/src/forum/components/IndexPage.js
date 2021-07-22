@@ -126,7 +126,7 @@ export default function () {
                                     const active = (app.search.params().sort || Object.keys(sortMap)[0]) === value;
                                     app.title = "10TV";
                                     function change_hero() {
-                                         /* document.getElementsByClassName("Hero-title")[0].innerHTML = label.name; */
+                                        /* document.getElementsByClassName("Hero-title")[0].innerHTML = label.name; */
                                     }
 
                                     return LinkButton.component(
@@ -235,7 +235,17 @@ export default function () {
             viewItems.remove('sort');
         }
 
+        viewItems.add(
+            "preloader",
+            <div id="preloader"></div>
+        );
 
+        document.addEventListener('readystatechange', event => { 
+
+            document.getElementById("preloader").style.opacity = 0;
+        
+            
+        });
 
         let items = IndexPage.prototype.sidebarItems().items.nav.content.children;
 
