@@ -248,10 +248,19 @@ export default function () {
         $(window).on('load', function () {
             document.getElementById("preloader").style.opacity = 0;
 
-            setTimeout(function(){
+            setTimeout(function () {
                 document.getElementById("preloader").style.display = "none";
-               }, 400);
+            }, 400);
         })
+
+        setTimeout(function () {
+            document.getElementById("preloader").style.opacity = 0;
+            setTimeout(function () {
+                document.getElementById("preloader").style.display = "none";
+            }, 400);
+        }, 3000);
+
+
 
         let items = IndexPage.prototype.sidebarItems().items.nav.content.children;
 
