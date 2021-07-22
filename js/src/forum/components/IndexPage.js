@@ -237,15 +237,21 @@ export default function () {
 
         viewItems.add(
             "preloader",
-            <div id="preloader"></div>
+            <div id="preloader">
+                <div class="loading">
+                    <div class="circle_loading"></div>
+                </div>
+            </div>
         );
 
-        document.addEventListener('readystatechange', event => { 
 
+        $(window).on('load', function () {
             document.getElementById("preloader").style.opacity = 0;
-        
-            
-        });
+
+            setTimeout(function(){
+                document.getElementById("preloader").style.display = "none";
+               }, 400);
+        })
 
         let items = IndexPage.prototype.sidebarItems().items.nav.content.children;
 
