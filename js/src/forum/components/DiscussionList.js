@@ -14,7 +14,7 @@ export default function () {
 
                 if ((text == "Canale") || (text == "An") || (text == "Luna") || (text == "Zi") || (text == "Emisiuni")) {
                     items1.items.tags.content.children[i].attrs.className += " d-none"
-                    console.log(items1.items.tags.content.children[i].attrs.className)
+                    /* console.log(items1.items.tags.content.children[i].attrs.className) */
 
                 }
                 /* console.log(items1.items.tags.content.children[i].children[0].children[2].children) */

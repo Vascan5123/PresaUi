@@ -46,7 +46,7 @@ export default function () {
         let tagLength = tags.children[0].children.length;
 
         for (let i = 0; i < tagLength; i++) {
-            if((tags.children[0].children[i].children[0].children[0].tag != "i")&&(tags.children[0].children[i].attrs.className.includes("TagLabel--child") == false)){
+            if ((tags.children[0].children[i].children[0].children[0].tag != "i") && (tags.children[0].children[i].attrs.className.includes("TagLabel--child") == false)) {
                 tags.children[0].children[i].attrs.className += " d-none"
                 /* console.log(tags.children[0].children[i].attrs.className) */
             }

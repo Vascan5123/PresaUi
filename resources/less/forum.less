@@ -1,6 +1,49 @@
+.DiscussionHero {
+    background: rgb(15, 65, 119);
+    color: #fff;
+    .TagLabel {
+        color: #fff;
+    }
+}
+.DiscussionPage-discussion .container-fluid {
+    padding: 1rem;
+} 
+.Post {
+    margin: 0px !important;
+}
+.Post-body {
+    display: flex;
+    flex-direction: row;
+}
+.DiscussionPage-nav-ul {
+    margin: 0px;
+    display: flex;
+    list-style: none;
+    justify-content: end;
+    li {
+        margin-right: 1rem;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 .IndexPage, .DiscussionsUserPage{
+    
     .DiscussionListItem-content {
         padding: 0px !important;
     }
@@ -9,6 +52,9 @@
         box-shadow: 0 6px 4px 0px rgba(0, 0, 0, 0.15);
         padding: 20px;
         margin-left: 0px !important;
+    }
+    .DiscussionListItem-info {
+        pointer-events: none;
     }
     .DiscussionListItem-info .item-excerpt img {
         max-width: 100% !important;
@@ -416,6 +462,9 @@ body {
     margin: 0px;
 }
 @media (min-width: 768px){
+    .DiscussionPage-stream {
+        margin-right: 0px !important;
+    }
     .DiscussionListItem-controls {
         position: absolute;
         top: unset !important;
@@ -451,7 +500,6 @@ iframe {
 .DiscussionPage {
 
     video {
-        max-width: 65% !important;
         display: block;
         margin: auto;
         border-radius: 8px !important;
