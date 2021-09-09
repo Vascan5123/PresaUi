@@ -24,7 +24,7 @@ export default function () {
         console.log(view);
     }); */
 
-
+    
     override(DiscussionPage.prototype, 'view', function () {
         const discussion = this.discussion;
 
@@ -64,24 +64,28 @@ export default function () {
 
     override(PostStream.prototype, 'view', function () {
 
-
-        let video = document.getElementsByClassName('video');
-        let text = document.getElementsByClassName('text');
-        
-        if((text[0] != undefined)&&(video[0] != undefined)){
-            if(window.innerWidth >= '900'){
-                let h = video[0].getElementsByTagName('iframe')[0].clientHeight;
+      let video = document.getElementsByClassName('video');
+      let text = document.getElementsByClassName('text');
+      
+      if((text[0] != undefined)&&(video[0] != undefined)){
+          if(window.innerWidth >= '900'){
+              let h = video[0].getElementsByTagName('iframe')[0].clientHeight;
+              if(h != 0){
                 text[0].style.height = h + "px";
-            }
-            window.addEventListener('resize', function(event){
-                if(window.innerWidth >= '900'){
-                    let h = video[0].getElementsByTagName('iframe')[0].clientHeight;
-                    text[0].style.height = h + "px";
-                }else{
-                    text[0].style.height = "auto";
-                }
-              });
-        }
+              }
+          }
+          window.addEventListener('resize', function(event){
+              if(window.innerWidth >= '900'){
+                  let h = video[0].getElementsByTagName('iframe')[0].clientHeight;
+                  if(h != 0){
+                   text[0].style.height = h + "px";
+                  }
+              }else{
+                  text[0].style.height = "auto";
+              }
+            });
+      }
+        
 
 
 
