@@ -24,7 +24,7 @@ export default function () {
                     className: 'Button Button--primary item-Emoldova',
                     itemClassName: '',
                 },
-                "E-Moldova"
+                "e-Moldova"
             ),
         );
 
