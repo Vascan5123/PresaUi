@@ -14,6 +14,8 @@ import DiscussionControls from 'flarum/utils/DiscussionControls';
 import PostStreamState from 'flarum/states/PostStreamState';
 import PostLoading from 'flarum/components/LoadingPost';
 import ReplyPlaceholder from 'flarum/components/ReplyPlaceholder';
+import PostStreamScrubber from 'flarum/components/PostStreamScrubber';
+
 export default function () {
 
 
@@ -37,17 +39,16 @@ export default function () {
                             /* DiscussionHero.component({ discussion }), */
                             <div className="container-fluid">
                                 {/* <nav className="DiscussionPage-nav">
-                  <ul>{listItems(this.sidebarItems().toArray())}</ul>
-                </nav> */}
+                                  <ul>{listItems(this.sidebarItems().toArray())}</ul>
+                                </nav> */}
                                 <div className="DiscussionPage-stream">
-                                    {<ul className="DiscussionPage-nav-ul">{listItems(this.sidebarItems().toArray())}</ul>}
-
+                                    {/* {<ul className="DiscussionPage-nav-ul">{listItems(this.sidebarItems().toArray())}</ul>} */}
                                     {
-                                        /* console.log(this.stream), */
                                         PostStream.component({
                                             discussion,
                                             stream: this.stream,
                                             onPositionChange: this.positionChanged.bind(this),
+                                            sidebarItems: this.sidebarItems(),
                                         })}
                                 </div>
                             </div>,
@@ -60,44 +61,50 @@ export default function () {
         );
     });
 
+    override(DiscussionPage.prototype, 'sidebarItems', function () {
+      const items = new ItemList();
 
+      let controls = DiscussionControls.controls(this.discussion, this).toArray()
+      controls[0].children[0] = "Editate";
+      controls[0].attrs.icon = "fas fa-pencil-alt";
+
+      console.log();
+
+      if(app.session.user != undefined){
+        items.add(
+          'controls',
+          SplitDropdown.component(
+            {
+              icon: 'fas fa-ellipsis-v',
+              className: 'App-primaryControl',
+              buttonClassName: 'Button',
+              accessibleToggleLabel: app.translator.trans('core.forum.discussion_controls.toggle_dropdown_accessible_label'),
+            },
+            controls
+          )
+        );
+      }
+
+      /* items.add(
+        'scrubber',
+        PostStreamScrubber.component({
+          stream: this.stream,
+          className: 'App-titleControl',
+        }),
+        -100
+      ); */
+
+      return items;
+    });
 
     override(PostStream.prototype, 'view', function () {
-
-      let video = document.getElementsByClassName('video');
-      let text = document.getElementsByClassName('text');
-      
-      if((text[0] != undefined)&&(video[0] != undefined)){
-          if(window.innerWidth >= '900'){
-              let h = video[0].getElementsByTagName('iframe')[0].clientHeight;
-              if(h != 0){
-                text[0].style.height = h + "px";
-              }
-          }
-          window.addEventListener('resize', function(event){
-              if(window.innerWidth >= '900'){
-                  let h = video[0].getElementsByTagName('iframe')[0].clientHeight;
-                  if(h != 0){
-                   text[0].style.height = h + "px";
-                  }
-              }else{
-                  text[0].style.height = "auto";
-              }
-            });
-      }
-        
-
-
-
-
-
 
         let lastTime;
 
         const viewingEnd = this.stream.viewingEnd();
         const posts = this.stream.posts();
         const postIds = this.discussion.postIds();
-    
+        
         const postFadeIn = (vnode) => {
           $(vnode.dom).addClass('fadeIn');
           // 500 is the duration of the fadeIn CSS animation + 100ms,
@@ -142,14 +149,52 @@ export default function () {
             content = PostLoading.component();
           }
           if(attrs['data-number'] == 1){
-            /* content2 = content.attrs.post.data.attributes.contentHtml; */
-            /* console.log(content.attrs.post.data.attributes.contentHtml); */
-          }
+
+              var contentHtml = content.attrs.post.data.attributes.contentHtml;
+
+
+              var video = contentHtml.split('[video]')
+                .filter(function(v){ return v.indexOf('[/video]') > -1})
+                .map( function(value) { 
+                  return value.split('[/video]')[0]
+              });
+
+              var videoDiv = document.getElementsByClassName('video')[0];
+              if((videoDiv != undefined)&&(videoDiv.innerHTML == "")){
+                videoDiv.innerHTML = video[0];
+              }
+
+              var text = contentHtml.split('[text]')
+                .filter(function(v){ return v.indexOf('[/text]') > -1})
+                .map( function(value) { 
+                  return value.split('[/text]')[0]
+              });
+
+              var textDiv = document.getElementsByClassName('description')[0];
+              if((textDiv != undefined)&&(textDiv.innerHTML == "")){
+                textDiv.innerHTML = text[0];
+              }
+
+              let sidebarItems = this.attrs.sidebarItems;
+              /* sidebarItems.items.controls.content.attrs.buttonClassName = "Button";
+              content.attrs.post.data.attributes.votes++; */
+              return (
+                <div className="PostStream-item" {...attrs}>
+                  <div class="video"></div>
+                  <div class="text">
+                    <ul className="actions DiscussionPage-nav-ul">{listItems(sidebarItems.toArray())}</ul>
+                    <div class="description"></div>
+                    <div class="actions_2"></div>
+                    </div>
+                </div>
+              );
+          }else{
           return (
             <div className="PostStream-item" {...attrs}>
               {content}
             </div>
           );
+          }
         });
     
         if (!viewingEnd && posts[this.stream.visibleEnd - this.stream.visibleStart - 1]) {

@@ -7,9 +7,6 @@
   }
 }
 
-.DiscussionPage-discussion .container-fluid {
-  padding: 1rem;
-}
 
 .Post {
   margin: 0px !important;
@@ -56,6 +53,10 @@
 
 .IndexPage,
 .DiscussionsUserPage {
+  iframe {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
 
   .DiscussionListItem-content {
     padding: 0px !important;
@@ -197,24 +198,36 @@
     left: 225px;
   }
 
+  .item-newDiscussion {
+    perspective: 200px;
+    -webkit-perspective: 200px;
+    box-shadow: 0px 10px 10px rgba(34, 34, 34, 0.4);
+    width: 88%;
+    margin: auto !important;
+  }
+
   .IndexPage-nav .item-newDiscussion .Button {
-    position: absolute;
+    /* position: absolute;
     left: 0%;
-    top: 0%;
+    top: 0%; */
+    transform: rotateX(10deg);
     height: 52px;
-    border-radius: 0px;
-    background: #585e83 !important;
-    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    background: #bfa742 !important;
+    transition: .3s;
+    letter-spacing: 1px;
+    /* box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2); */
   }
 
   .IndexPage-nav .item-newDiscussion .Button:hover {
-    background: #686f99 !important;
+    transform: rotateX(10deg) translate(0px, 5px);
+    background: #bf923a !important;
   }
 
   .IndexPage-nav .item-Emoldova .Button {
     position: absolute;
     left: 0%;
-    bottom: 0%;
+    top: 0%;
     height: 52px;
     border-radius: 0px;
     background: #585e83 !important;
@@ -233,7 +246,7 @@
 
   .sideNav>ul {
     width: 100% !important;
-    margin-top: 60px;
+    margin-top: 65px;
   }
 
   .sideNav .Dropdown--select .Dropdown-menu>li>a {
@@ -344,9 +357,9 @@
   }
 
   .IndexPage-nav .item-newDiscussion .Button {
-    position: absolute;
+    /* position: absolute;
     left: 0%;
-    top: 0%;
+    top: 0%; */
     height: 52px;
     width: 100%;
     border-radius: 0px;
@@ -361,7 +374,7 @@
   .IndexPage-nav .item-Emoldova .Button {
     position: absolute;
     left: 0%;
-    bottom: 0%;
+    top: 0%;
     height: 52px;
     border-radius: 0px;
     background: #585e83 !important;
@@ -426,7 +439,7 @@
     box-shadow: 0 6px 4px -4px rgba(0, 0, 0, 0.2);
   }
 
-  .sideNav>ul>li>div>button {}
+  /* .sideNav>ul>li>div>button {} */
 
 
 
@@ -548,10 +561,6 @@ body {
   margin-bottom: 4px;
 }
 
-.IndexPage-nav .item-newDiscussion {
-  margin: 0px;
-}
-
 @media (min-width: 768px) {
   .DiscussionPage-stream {
     margin-right: 0px !important;
@@ -584,10 +593,6 @@ video {
   padding: 10px;
 }
 
-iframe {
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-}
 
 
 
@@ -720,8 +725,43 @@ iframe {
   padding-bottom: 56.25% !important;
 }
 
+@media (max-width: 1100px) {
+  .PostStream-item[data-number="1"] {
+    flex-direction: column;
+  }
+
+  .DiscussionPage-discussion .container-fluid {
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 1100px) and (max-width: 1300px) {
+  .PostStream {
+    width: 30%;
+    margin-left: 70%;
+  }
+
+  .DiscussionPage-discussion .container-fluid {
+    padding: .5rem;
+  }
+}
+
+@media (min-width: 1300px) {
+  .PostStream {
+    width: 27%;
+    margin-left: 73%;
+  }
+
+  .DiscussionPage-discussion .container-fluid {
+    padding: 1rem;
+  }
+}
+
+
 
 .PostStream-item[data-number="1"] {
+  display: flex;
+
   .Post-header {
     display: none;
   }
@@ -730,74 +770,165 @@ iframe {
     padding: 0px;
   }
 
-  .Post-body {
-    overflow: visible;
+  .video {
+    display: contents;
+  }
 
+  @media (min-width: 1100px) {
+    .actions {
+      padding: 0px;
+      font-size: 1rem;
+      margin-bottom: 10px;
+      justify-content: center;
+    }
 
+    p {
+      display: contents;
+      position: relative;
+    }
 
-    .video {
-      position: absolute;
+    .video>span>span {
+      height: 100%;
+    }
+
+  }
+
+  @media (min-width: 1100px) and (max-width: 1300px) {
+    .video>img {
+      display: block !important;
+      width: 69.5% !important;
+      max-width: unset !important;
+      border-radius: 0px;
+      overflow: hidden;
+      box-shadow: 0px 5px 12px rgba(0, 0, 0, .25);
+      position: fixed;
       top: 0%;
       left: 0%;
-      display: contents;
+      padding-top: 52px;
+      height: 100vh;
+      z-index: 2;
     }
 
-    @media (min-width: 900px) {
-      p {
-        display: contents;
-        position: relative;
-      }
-
-      .video>span {
-        display: block !important;
-        width: 74% !important;
-        max-width: unset !important;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0px 5px 12px rgba(0, 0, 0, .25);
-      }
-      
-      .text {
-        margin-left: 1%;
-        width: 25%;
-        padding: 1rem;
-        background-color: #383c53;
-        font-size: 1.1rem;
-        color: #f1f1f1;
-        border-radius: 10px;
-        box-shadow: 0px 5px 12px rgba(0, 0, 0, .25);
-        text-align: justify;
-        overflow: auto;
-      }
+    .video>span {
+      display: block !important;
+      width: 69.5% !important;
+      max-width: unset !important;
+      border-radius: 0px;
+      overflow: hidden;
+      box-shadow: 0px 5px 12px rgba(0, 0, 0, .25);
+      position: fixed;
+      top: 0%;
+      left: 0%;
+      padding-top: 52px;
+      height: 100vh;
+      z-index: 2;
     }
 
-    @media (max-width: 900px) {
-      p {
-        display: block;
-        position: relative;
-      }
+    .text {
+      position: relative;
+      margin-bottom: 1%;
+      margin-left: 1%;
+      width: 100%;
+      padding: 1rem;
+      background-color: #383c53;
+      font-size: 1.1rem;
+      color: #f1f1f1;
+      border-radius: 10px;
+      box-shadow: 0px 5px 12px rgba(0, 0, 0, .25);
+      text-align: justify;
+      overflow: auto;
+      min-height: 40vh;
+      max-height: 60vh;
+    }
+  }
 
-      .video>span {
-        display: block !important;
-        width: 100% !important;
-        max-width: unset !important;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0px 5px 12px rgba(0, 0, 0, .25);
-      }
+  @media (min-width: 1300px) {
+    .video>img {
+      display: block !important;
+      width: 72% !important;
+      max-width: unset !important;
+      border-radius: 0px;
+      overflow: hidden;
+      box-shadow: 0px 5px 12px rgba(0, 0, 0, .25);
+      position: fixed;
+      top: 0%;
+      left: 0%;
+      padding-top: 52px;
+      height: 100vh;
+      z-index: 2;
+    }
 
-      .text {
-        display: block;
-        width: 100%;
-        padding: 1rem;
-        background-color: #383c53;
-        font-size: 1.1rem;
-        color: #ddd;
-        border-radius: 10px;
-        box-shadow: 0px 5px 12px rgba(0, 0, 0, .25);
-        text-align: justify;
-        overflow: auto;
-      }
+    .video>span {
+      display: block !important;
+      width: 72% !important;
+      max-width: unset !important;
+      border-radius: 0px;
+      overflow: hidden;
+      box-shadow: 0px 5px 12px rgba(0, 0, 0, .25);
+      position: fixed;
+      top: 0%;
+      left: 0%;
+      padding-top: 52px;
+      height: 100vh;
+      z-index: 2;
+    }
+
+    .text {
+      position: relative;
+      margin-bottom: 1%;
+      margin-left: 1%;
+      width: 100%;
+      padding: 1rem;
+      background-color: #383c53;
+      font-size: 1.1rem;
+      color: #f1f1f1;
+      border-radius: 10px;
+      box-shadow: 0px 5px 12px rgba(0, 0, 0, .25);
+      text-align: justify;
+      overflow: auto;
+      min-height: 40vh;
+      max-height: 60vh;
+    }
+  }
+
+  @media (max-width: 1100px) {
+    p {
+      display: block;
+      position: relative;
+    }
+
+    .video>span {
+      display: block !important;
+      width: 100% !important;
+      max-width: unset !important;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0px 5px 12px rgba(0, 0, 0, .25);
+    }
+
+    .video>img {
+      display: block !important;
+      width: 100% !important;
+      max-width: unset !important;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0px 5px 12px rgba(0, 0, 0, .25);
+    }
+
+    .text {
+      position: relative;
+      margin-top: 2%;
+      margin-bottom: 2%;
+      display: block;
+      width: 100%;
+      padding: 1rem;
+      background-color: #383c53;
+      font-size: 1.1rem;
+      color: #ddd;
+      border-radius: 10px;
+      box-shadow: 0px 5px 12px rgba(0, 0, 0, .25);
+      text-align: justify;
+      overflow: auto;
     }
   }
 
@@ -818,4 +949,25 @@ iframe {
 
 .PostStream-item:not(:last-child) {
   border-bottom: 1px solid #474c6a;
+}
+
+
+.DiscussionListItem-info .item-excerpt img {
+  aspect-ratio: 16/9;
+  object-fit: cover;
+}
+
+.actions_2 {
+  position: absolute;
+  bottom: 0%;
+  /* background: #eaebf1; */
+  width: 100%;
+  left: 0%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: .2rem;
+}
+
+.description {
+  margin-bottom: 20px;
 }

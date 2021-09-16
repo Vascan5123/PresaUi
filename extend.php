@@ -27,11 +27,11 @@ return [
         ->configure(function(Configurator $config) {
             $config->BBCodes->addCustom(
                 '[video]{TEXT}[/video]',
-                '<span class="video">{TEXT}</span>'
+                '[video]{TEXT}[/video]'
             );
             $config->BBCodes->addCustom(
                 '[text]{TEXT}[/text]',
-                '<span class="text">{TEXT}</span>'
+                '[text]{TEXT}[/text]'
             );
         })
     
