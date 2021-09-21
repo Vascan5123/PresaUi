@@ -265,7 +265,7 @@ export default function () {
                     document.getElementById("preloader").style.display = "none";
                 }, 400);
             }
-        }, 3000);
+        }, 2000);
 
 
 

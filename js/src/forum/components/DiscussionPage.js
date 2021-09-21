@@ -91,7 +91,7 @@ export default function () {
                                   <ul>{listItems(this.sidebarItems().toArray())}</ul>
                                 </nav> */}
                 <div className="DiscussionPage-stream">
-                  {/* {<ul className="DiscussionPage-nav-ul">{listItems(this.sidebarItems().toArray())}</ul>} */}
+                  <ul className="DiscussionPage-nav-ul">{listItems(this.sidebarItems().toArray())}</ul>
                   {
                     PostStream.component({
                       discussion,
@@ -114,8 +114,8 @@ export default function () {
     const items = new ItemList();
 
     let controls = DiscussionControls.controls(this.discussion, this).toArray()
-    controls[0].children[0] = "Editare";
-    controls[0].attrs.icon = "fas fa-pencil-alt";
+    /* controls[0].children[0] = "Editare";
+    controls[0].attrs.icon = "fas fa-pencil-alt"; */
 
     console.log();
 
@@ -198,58 +198,48 @@ export default function () {
         content = PostLoading.component();
       }
 
-       if (attrs['data-number'] == 1) {
- 
-         var contentHtml = content.attrs.post.data.attributes.contentHtml;
- 
- 
-         var video = contentHtml.split('[video]')
-           .filter(function (v) { return v.indexOf('[/video]') > -1 })
-           .map(function (value) {
-             return value.split('[/video]')[0]
-           });
- 
-         var videoDiv = document.getElementsByClassName('video')[0];
-         if ((videoDiv != undefined) && (videoDiv.innerHTML == "")) {
-           videoDiv.innerHTML = video[0];
-         }
+      if (attrs['data-number'] == 1) {
 
-      var text = contentHtml.split('[text]')
-        .filter(function (v) { return v.indexOf('[/text]') > -1 })
-        .map(function (value) {
-          return value.split('[/text]')[0]
-        });
+        var contentHtml = content.attrs.post.data.attributes.contentHtml;
 
-      var textDiv = document.getElementsByClassName('description')[0];
-      if ((textDiv != undefined) && (textDiv.innerHTML == "")) {
-        textDiv.innerHTML = text[0];
-      }
 
-      let sidebarItems = this.attrs.sidebarItems;
+        var video = contentHtml.split('[video]')
+          .filter(function (v) { return v.indexOf('[/video]') > -1 })
+          .map(function (value) {
+            return value.split('[/video]')[0]
+          });
 
-      /* return (
-        <div className="PostStream-item" {...attrs}>
-          <div class="video"></div>
-          <div class="text">
-            <ul className="actions DiscussionPage-nav-ul">{listItems(sidebarItems.toArray())}</ul>
-            <div class="description"></div>
+        var videoDiv = document.getElementsByClassName('video')[0];
+        if ((videoDiv != undefined) && (videoDiv.innerHTML == "")) {
+          videoDiv.innerHTML = video[0];
+        }
+
+        var text = contentHtml.split('[text]')
+          .filter(function (v) { return v.indexOf('[/text]') > -1 })
+          .map(function (value) {
+            return value.split('[/text]')[0]
+          });
+
+        var textDiv = document.getElementsByClassName('description')[0];
+        if ((textDiv != undefined) && (textDiv.innerHTML == "")) {
+          textDiv.innerHTML = text[0];
+        }
+
+        let sidebarItems = this.attrs.sidebarItems;
+
+        return (
+          <div className="PostStream-item" {...attrs}>
+            {/* <ul className="actions DiscussionPage-nav-ul">{listItems(sidebarItems.toArray())}</ul> */}
             {content}
-            <div class="actions_2"></div>
           </div>
-        </div>
-      ); */
-      return (
-        <div className="PostStream-item" {...attrs}>
-          {content}
-        </div>
-      );
-       } else {
-      return (
-        <div className="PostStream-item" {...attrs}>
-          {content}
-        </div>
-      );
-       }
+        );
+      } else {
+        return (
+          <div className="PostStream-item" {...attrs}>
+            {content}
+          </div>
+        );
+      }
     });
 
     if (!viewingEnd && posts[this.stream.visibleEnd - this.stream.visibleStart - 1]) {
@@ -285,31 +275,50 @@ export default function () {
   override(CommentPost.prototype, 'content', function () {
     if (this.attrs.post.data.attributes.number == 1) {
 
-
-      var contentHtml = this.attrs.post.contentHtml();
-
-      /* <ul className="actions DiscussionPage-nav-ul">{listItems(sidebarItems.toArray())}</ul> */
-
-      /* let sidebarItems = PostStream.prototype.postIds; */
+      var contentData = this.attrs.post.data.attributes.contentHtml;
       
-      /* console.log(sidebarItems); */
-
-      return ([
-        <header className="Post-header">
-          <ul>{listItems(this.headerItems().toArray())}</ul>
-        </header>,
-        <div className="Post-body">
-          {this.isEditing() ? <ComposerPostPreview className="Post-preview" composer={app.composer} /> :
-            <div>
-              <div class="video"></div>
-              <div class="text">
-                <div class="description"></div>
-                <div class="actions_2"></div>
+      var video = contentData.indexOf('[video]');
+        
+      if (video != -1) {
+        return ([
+          <header className="Post-header">
+            <ul>{listItems(this.headerItems().toArray())}</ul>
+          </header>,
+          <div className="Post-body">
+            {this.isEditing() ? <ComposerPostPreview className="Post-preview" composer={app.composer} /> :
+              <div>
+                <div class="video"></div>
+                <div class="text">
+                  <div class="description"></div>
+                  <div class="actions_2"></div>
+                </div>
               </div>
-            </div>
-          }
-        </div>,
-      ]);
+            }
+          </div>,
+        ]);
+      } else {
+        var PostStream = document.getElementsByClassName('PostStream');
+        if(PostStream){
+          PostStream[0].classList.add('PostStream-text');
+          PostStream[0].classList.remove('PostStream');
+        }
+        return ([
+          <header className="Post-header">
+            <ul>{listItems(this.headerItems().toArray())}</ul>
+          </header>,
+          <div className="Post-body-text">
+            {this.isEditing() ? <ComposerPostPreview className="Post-preview" composer={app.composer} /> :
+              <div>
+                <div class="text">
+                  <div class="description"></div>
+                  <div class="actions_2"></div>
+                </div>
+              </div>
+            }
+          </div>,
+        ]);
+      }
+
     }
     else {
       return ([
