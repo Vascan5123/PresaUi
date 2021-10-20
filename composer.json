@@ -6,7 +6,9 @@
   "type": "flarum-extension",
   "license": "MIT",
   "require": {
-    "flarum/core": "^1.0"
+    "flarum/core": "^1.0",
+    "flarum/tags": "^1.0",
+    "ianm/synopsis": "^1.0"
   },
   "authors": [
     {

@@ -2,6 +2,8 @@ import app from 'flarum/common/app';
 import { extend, override } from 'flarum/extend';
 
 import DiscussionListItem from 'flarum/components/DiscussionListItem';
+//import DiscussionTaggedPost from 'flarum/tags/components/DiscussionTaggedPost';
+//import DiscussionListItem from 'flarum/components/DiscussionListItem';
 import DiscussionControls from 'flarum/utils/DiscussionControls';
 import Dropdown from 'flarum/components/Dropdown';
 import icon from 'flarum/helpers/icon';
@@ -16,6 +18,30 @@ import abbreviateNumber from 'flarum/utils/abbreviateNumber';
 import { escapeRegExp } from 'lodash-es';
 
 export default function () {
+    extend(DiscussionListItem.prototype, 'infoItems', function (items) {
+        var tags = this.attrs.discussion.tags();
+        for (var i = 0; i < tags.length; ++i) {
+            if (tags[i].children() && (!tags[i].isChild() && !tags[i].icon() == '')) {//??? wtf
+                items.items.tags.content.children[i].attrs.className += " d-none"
+            }
+
+        }
+
+        if (items.items.excerpt) {
+            var excerpt = items.items.excerpt.content.children[0].children;
+            var driveRegex = /(?<=\/file\/d\/)[\w-]*(?=\/)/g;//get file id
+            var driveMatch = excerpt.match(driveRegex);
+            if (driveMatch) {
+                driveMatch = "https://drive.google.com/thumbnail?id=" + driveMatch[0];
+                items.items.excerpt.content.children[0] = <p><img src={driveMatch} /><img className="button_play" src="https://i.ibb.co/187fdWh/25178.png" /></p>;//TODO: Insert play icon
+            }
+            var youtubeRegex = /(?<=background\:url\()https.*\.jpg(?=\)\s)/g;//extract already existing thumbnail
+            var youtubeMatch = excerpt.match(youtubeRegex);
+            if (youtubeMatch) {
+                items.items.excerpt.content.children[0] = <p><img src={youtubeMatch[0]} /><img className="button_play" src="https://i.ibb.co/187fdWh/25178.png" /></p>;//TODO: Insert play icon
+            }
+        }
+    });
 
     override(DiscussionListItem.prototype, 'view', function () {
         const discussion = this.attrs.discussion;
@@ -45,11 +71,11 @@ export default function () {
 
         let tagLength = tags.children[0].children.length;
 
-        for (let i = 0; i < tagLength; i++) {
-            if ((tags.children[0].children[i].children[0].children[0].tag != "i") && (tags.children[0].children[i].attrs.className.includes("TagLabel--child") == false)) {
-                tags.children[0].children[i].attrs.className += " d-none"
-            }
-        }
+        //for (let i = 0; i < tagLength; i++) {
+        // if (tags.children[0].children[i].children[0].children[0] && (tags.children[0].children[i].children[0].children[0].tag != "i") && (tags.children[0].children[i].attrs.className.includes("TagLabel--child") == false)) {
+        //     tags.children[0].children[i].attrs.className += " d-none"
+        // }
+        //}
 
         return (
             <div {...attrs}>
