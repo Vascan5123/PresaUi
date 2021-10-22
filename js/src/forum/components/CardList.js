@@ -28,9 +28,7 @@ export default function () {
 
         } */
 
-        console.log(items);
         if (items.items.excerpt) {
-            console.log(items.items.excerpt);
             let empty = 0;
             var excerpt = items.items.excerpt.content.children[0].children;
             var driveRegex = /(?<=\/file\/d\/)[\w-]*(?=\/)/g;//get file id
@@ -51,6 +49,8 @@ export default function () {
             if (empty == 2) {
                 //Значит нету видео
                 let str = items.items.excerpt.content.children[0];
+                str.children = str.children.replace("[video]", "");
+                str.children = str.children.replace("[/video]", "");
                 str.children = str.children.replace("[text]", "");
                 str.children = str.children.replace("[/text]", "");
                 items.items.excerpt.content.children[0] = <span class="DiscussionListItem-only-text">{str}</span>;
