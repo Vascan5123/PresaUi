@@ -219,15 +219,15 @@ export default function () {
           .map(function (value) {
             return value.split('[/text]')[0]
           });
-
-        var textDiv = document.getElementsByClassName('description')[0];
-        if ((text.length > 0) && (textDiv.innerHTML == "")) {
-          textDiv.innerHTML = text[0];
-        } else if(textDiv){
-          textDiv.classList.add("d-none");
-          document.getElementsByClassName("text")[0].classList.add("text_no_text");
+        if (document.getElementsByClassName('description').length > 0) {
+          var textDiv = document.getElementsByClassName('description')[0];
+          if ((text.length > 0) && (textDiv.innerHTML == "")) {
+            textDiv.innerHTML = text[0];
+          } else if (textDiv) {
+            textDiv.classList.add("d-none");
+            document.getElementsByClassName("text")[0].classList.add("text_no_text");
+          }
         }
-
         let sidebarItems = this.attrs.sidebarItems;
 
         return (
