@@ -82,14 +82,14 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 28%;
+    width: 28% !important;
     transform: translate(-50%, -50%);
     object-fit: contain !important;
     aspect-ratio: 1 !important;
   }
 
   .DiscussionListItem-info .item-excerpt img {
-    width: 100% !important;
+    width: 100%;
     float: left;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
@@ -906,6 +906,20 @@ video {
       min-height: 40vh;
       max-height: 60vh;
     }
+
+    
+  }
+  .text_no_text {
+    min-height: unset !important;
+    background-color: transparent !important;
+    box-shadow: unset !important;
+  }
+  @media (min-width: 768px) {
+
+    .CommentPost:not(.Post--hidden),
+    .ReplyPlaceholder {
+      min-height: 0px !important;
+    }
   }
 
   @media (max-width: 1100px) {
@@ -1056,6 +1070,7 @@ video {
           box-shadow: 0px 5px 12px rgba(0, 0, 0, .25);
         }
       }
+
     }
   }
 

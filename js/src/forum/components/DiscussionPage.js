@@ -221,8 +221,11 @@ export default function () {
           });
 
         var textDiv = document.getElementsByClassName('description')[0];
-        if ((textDiv != undefined) && (textDiv.innerHTML == "")) {
+        if ((text.length > 0) && (textDiv.innerHTML == "")) {
           textDiv.innerHTML = text[0];
+        } else if(textDiv){
+          textDiv.classList.add("d-none");
+          document.getElementsByClassName("text")[0].classList.add("text_no_text");
         }
 
         let sidebarItems = this.attrs.sidebarItems;
@@ -276,9 +279,9 @@ export default function () {
     if (this.attrs.post.data.attributes.number == 1) {
 
       var contentData = this.attrs.post.data.attributes.contentHtml;
-      
+
       var video = contentData.indexOf('[video]');
-        
+
       if (video != -1) {
         return ([
           <header className="Post-header">
@@ -298,7 +301,7 @@ export default function () {
         ]);
       } else {
         var PostStream = document.getElementsByClassName('PostStream');
-        if(PostStream){
+        if (PostStream) {
           PostStream[0].classList.add('PostStream-text');
           PostStream[0].classList.remove('PostStream');
         }

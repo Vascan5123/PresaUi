@@ -29,7 +29,6 @@ export default function () {
         } */
 
         if (items.items.excerpt) {
-            console.log(items.items.excerpt);
             let empty = 0;
             var excerpt = items.items.excerpt.content.children[0].children;
             var driveRegex = /(?<=\/file\/d\/)[\w-]*(?=\/)/g;//get file id
