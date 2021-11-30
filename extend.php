@@ -33,6 +33,10 @@ return [
                 '[text]{TEXT}[/text]',
                 '[text]{TEXT}[/text]'
             );
+            $config->BBCodes->addCustom(
+                '[transcript]{TEXT}[/transcript]',
+                '[transcript]{TEXT}[/transcript]'
+            );
         })
     
 ];
