@@ -21,8 +21,17 @@ composer require vascan/presa-ui
 ![canale!](/resources/images_readme/canale.jpg "canale")
 ![sortare!](/resources/images_readme/sortare.jpg "sortare")
 
-### Noi putem să alegem "Canale" și "Emisiuni", sau să sortăm după etichete: "Cultura", "Politică", "Social".
+### Putem să alegem "Canale" și "Emisiuni", sau să sortăm după etichete: "Cultura", "Politică", "Social".
 
+## Presa UI Video Page
+
+![video page!](/resources/images_readme/video.jpg "video page")
+
+### In Video Page putem să uităm emisiunea și să comentăm.
+
+![share!](/resources/images_readme/share.jpg "share")
+
+### Avem posibilitatea să facem share
 
 ## Links
 
