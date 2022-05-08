@@ -117,7 +117,6 @@ export default function () {
     /* controls[0].children[0] = "Editare";
     controls[0].attrs.icon = "fas fa-pencil-alt"; */
 
-    console.log();
 
     if (app.session.user != undefined) {
       items.add(
@@ -224,7 +223,7 @@ export default function () {
           if ((text.length > 0) && (textDiv.innerHTML == "")) {
             textDiv.innerHTML = text[0];
           } else if ((textDiv) && (text.length < 0)) {
-            console.log(textDiv);
+            /* console.log(textDiv); */
             textDiv.classList.add("d-none");
             document.getElementsByClassName("text")[0].classList.add("text_no_text");
           }

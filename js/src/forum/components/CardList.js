@@ -73,7 +73,7 @@ export default function () {
             if (post) {
                 jumpTo = post.number();
             }
-            console.log(this.attrs.params.q)
+            /* console.log(this.attrs.params.q) */
             const phrase = escapeRegExp(this.attrs.params.q);
             this.highlightRegExp = new RegExp(phrase + '|' + phrase.trim().replace(/\s+/g, '|'), 'gi');
         } else {
