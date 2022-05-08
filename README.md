@@ -16,12 +16,12 @@ composer require vascan/presa-ui
 
 ![Home page!](/resources/images_readme/home.jpg "Home page")
 
-Presa.Emoldova este un portlet pentru integrarea și analiza emisiunilor de la cele mai populare canale naționale.
+# Presa.Emoldova este un portlet pentru integrarea și analiza emisiunilor de la cele mai populare canale naționale.
 
 ![canale!](/resources/images_readme/canale.jpg "canale")
 ![sortare!](/resources/images_readme/sortare.jpg "sortare")
 
-Noi putem să alegem "Canale" și "Emisiuni", sau să sortăm după etichete: "Cultura", "Politică", "Social".
+# Noi putem să alegem "Canale" și "Emisiuni", sau să sortăm după etichete: "Cultura", "Politică", "Social".
 
 
 ### Links
